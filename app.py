@@ -107,8 +107,8 @@ st.markdown("""
     }
     
     .book-title {
-        font-family: 'Manrope', sans-serif;
-        color: #ffffff;
+        font-family: 'Manrope', sans-serif !important;
+        color: #ffffff !important;
         font-size: 1.15rem;
         font-weight: 700;
         line-height: 1.3;
@@ -116,7 +116,7 @@ st.markdown("""
     }
     
     .book-card:hover .book-title {
-        color: #3b82f6;
+        color: #ef4444; /* Rojo/Glow discreto o blanco */
     }
     
     .drive-btn {
@@ -729,16 +729,18 @@ if len(df_filtered) > 0:
         <span style="font-size: 0.72rem; color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 4px;">
             <span class="material-symbols-outlined" style="font-size: 0.9rem;">description</span> PDF
         </span>
-        <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="padding: 5px 12px; font-size: 0.75rem; border-radius: 8px; display: flex; align-items: center; gap: 4px;">
-            OPEN <span class="material-symbols-outlined" style="font-size: 0.95rem;">open_in_new</span>
-        </a>
+        <div style="display: flex; gap: 6px;">
+            <button onclick="navigator.clipboard.writeText('{row['Drive_URL']}').then(() => {{ this.innerText = '✅ Copiado'; this.style.background = 'rgba(34, 197, 94, 0.2)'; setTimeout(() => {{ this.innerText = '📋 Copiar Link'; this.style.background = 'rgba(255, 255, 255, 0.04)'; }}, 2000); }})" class="drive-btn" style="background: rgba(255,255,255,0.04); color: #ffffff; padding: 5px 12px; font-size: 0.75rem; border-radius: 8px; cursor: pointer; border: 1px solid rgba(255,255,255,0.06); transition: all 0.2s;">
+                📋 Copiar Link
+            </button>
+            <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="padding: 5px 12px; font-size: 0.75rem; border-radius: 8px; display: flex; align-items: center; gap: 4px;">
+                OPEN <span class="material-symbols-outlined" style="font-size: 0.95rem;">open_in_new</span>
+            </a>
+        </div>
     </div>
 </div>
 """
                 st.markdown(html_card, unsafe_allow_html=True)
-                
-                # Utilidad para NotebookLM (Copiar Link rápido)
-                st_copy_to_clipboard(row['Drive_URL'], before_copy_label=_t("copy_btn"), show_text=False)
                 
                 # Botón para Resumen IA (Nivel 1)
                 with st.expander(_t("ai_summary")):
