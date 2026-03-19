@@ -53,6 +53,12 @@ st.markdown("""
         margin-bottom: 2rem;
     }
 
+    /* Fijar color de letras/etiquetas para fondo negro */
+    label, [data-testid="stWidgetLabel"] p {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500 !important;
+    }
+
     /* Estilos Dark para Inputs para unificar */
     div[data-baseweb="input"], input, textarea {
         background-color: rgba(255, 255, 255, 0.05) !important;
