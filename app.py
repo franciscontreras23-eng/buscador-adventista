@@ -18,8 +18,6 @@ st.set_page_config(
 # ================= =========================
 # ESTILOS PREMIUM (Vanilla CSS)
 # ==========================================
-# CSS (Light Theme)
-# ==========================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap');
@@ -29,69 +27,67 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
+    [data-testid="stSidebar"] { display: none !important; }
+    [data-testid="collapsedControl"] { display: none !important; }
+    
     .stApp {
-        background-color: #f8f9fa;
-        color: #191c1d;
+        background-color: #0d0d0d !important;
+        color: #ffffff !important;
     }
     
     .dashboard-header {
         font-family: 'Manrope', sans-serif;
         text-align: center;
-        padding: 3rem 1rem 1rem 1rem;
-        color: #191c1d;
+        padding: 2.5rem 1rem 0.5rem 1rem;
+        color: #ffffff;
         font-weight: 800;
-        font-size: 3rem !important;
+        font-size: 2.8rem !important;
         letter-spacing: -1px;
     }
     
     .dashboard-subheader {
         text-align: center;
-        color: #434655;
-        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 1rem;
+        font-style: italic;
         margin-bottom: 2rem;
     }
 
-    /* Forzar fondo claro y letra oscura en inputs para evitar problemas en móviles */
-    input, textarea {
-        background-color: #ffffff !important;
-        color: #191c1d !important;
-    }
-    
-    div[data-baseweb="input"] {
-        background-color: #ffffff !important;
-        border: 1px solid #e1e3e4 !important;
-        border-radius: 8px !important;
+    /* Estilos Dark para Inputs para unificar */
+    div[data-baseweb="input"], input, textarea {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        color: #ffffff !important;
+        border-radius: 12px !important;
         transition: all 0.3s ease;
     }
     
     div[data-baseweb="input"] input {
-        color: #191c1d !important;
+        color: #ffffff !important;
     }
     
     div[data-baseweb="input"]:focus-within {
-        border-color: #004ac6 !important;
-        box-shadow: 0 4px 15px rgba(0, 74, 198, 0.08) !important;
+        border-color: #2563eb !important;
+        background-color: rgba(255, 255, 255, 0.07) !important;
     }
 
-    /* Selectbox / Combobox con fondo claro */
     div[data-baseweb="select"] {
-        background-color: #ffffff !important;
-        border: 1px solid #e1e3e4 !important;
-        border-radius: 8px !important;
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px !important;
     }
     
     div[data-baseweb="select"] * {
-        color: #191c1d !important;
+        color: #ffffff !important;
     }
 
+    /* Cards - Estilo Digital Archive */
     .book-card {
-        background: #ffffff;
-        border-radius: 12px 12px 4px 4px;
+        background: #141414;
+        border-radius: 16px;
         padding: 1.5rem;
-        margin-bottom: 0rem !important;
-        box-shadow: 0px 4px 20px rgba(25, 28, 29, 0.04);
-        border: 1px solid #e1e3e4;
-        border-bottom: none;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.04);
         transition: all 0.4s ease;
         display: flex;
         flex-direction: column;
@@ -100,134 +96,123 @@ st.markdown("""
     
     .book-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0px 10px 40px rgba(0, 74, 198, 0.06);
-        border-color: #b4c5ff;
+        border-color: rgba(255, 255, 255, 0.12);
+        box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.7);
     }
     
     .book-title {
         font-family: 'Manrope', sans-serif;
-        color: #191c1d;
-        font-size: 1.1rem;
-        font-weight: 800;
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 700;
         line-height: 1.3;
         transition: color 0.3s;
     }
     
     .book-card:hover .book-title {
-        color: #004ac6;
-    }
-    
-    .book-collection {
-        display: inline-block;
-        background: #edeeef;
-        color: #434655;
-        font-size: 0.65rem;
-        padding: 0.2rem 0.6rem;
-        border-radius: 9999px;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
+        color: #3b82f6;
     }
     
     .drive-btn {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
-        color: #004ac6 !important;
+        background: #2563eb !important;
+        color: #ffffff !important;
         text-decoration: none !important;
-        font-family: 'Manrope', sans-serif;
-        font-weight: 700;
-        font-size: 0.85rem;
-        transition: transform 0.2s ease;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 10px;
+        transition: background 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
     
-    .book-card:hover .drive-btn {
-        transform: translateX(5px);
+    .drive-btn:hover {
+        background: #1d4ed8 !important;
     }
     
     .stat-container {
         display: flex;
         justify-content: center;
-        gap: 2rem;
+        gap: 1.5rem;
         margin-bottom: 2.5rem;
     }
     
     .stat-box {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.03);
         padding: 1rem 2rem;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
         text-align: center;
-        border-left: 1px solid #e1e3e4;
+        min-width: 140px;
     }
-    .stat-box:first-child { border-left: none; }
     
     .stat-value {
         font-family: 'Manrope', sans-serif;
-        font-size: 2.5rem;
-        font-weight: 900;
-        color: #004ac6;
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #ffffff;
         line-height: 1;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 4px;
     }
     
     .book-tag {
         display: inline-block;
-        background: #f3f4f5;
-        color: #434655;
-        font-size: 0.75rem;
-        padding: 0.3rem 0.8rem;
-        border-radius: 9999px;
-        margin-right: 0.4rem;
-        margin-bottom: 0.4rem;
-        font-weight: 600;
-        transition: background 0.2s;
+        background: rgba(255, 255, 255, 0.04);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.7rem;
+        padding: 0.25rem 0.55rem;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        font-weight: 500;
     }
-    .book-tag:hover {
-        background: #acbfff;
-        color: #00174b;
-    }
+
     .icon-box {
-        width: 4rem;
-        height: 4rem;
-        background: #dbe1ff;
-        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #004ac6;
-    }
-    .icon-box span { font-size: 2rem; }
-    .header-card {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 0.5rem;
-    }
-    .collection-pill {
-        background: #edeeef;
-        color: #434655;
-        font-size: 0.65rem;
-        font-weight: 800;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-    }
-    .file-stats {
-        display: flex;
-        gap: 2rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #737686;
-        margin-top: 0.5rem;
+        color: #3b82f6;
     }
     
-    /* Adaptaciones de la barra lateral y botones Streamlit */
-    .stButton>button {
-        border-radius: 8px;
-        border: 1px solid #c3c6d7;
-        color: #004ac6;
-        font-weight: 600;
+    .icon-box span { font-size: 1.4rem; }
+    
+    .collection-pill {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 0.25rem 0.65rem;
+        border-radius: 6px;
+        border: 1px solid rgba(59, 130, 246, 0.2);
     }
-    .stCheckbox label { color: #191c1d !important; }
+
+    .file-stats {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .stButton>button {
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        color: #ffffff;
+    }
+    .stCheckbox label { color: rgba(255,255,255,0.7) !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -511,29 +496,22 @@ df = cargar_datos()
 st.markdown(f'<div class="dashboard-header">{_t("title")}</div>', unsafe_allow_html=True)
 st.markdown(f'<div class="dashboard-subheader">{_t("subtitle")}</div>', unsafe_allow_html=True)
 
-# Sidebar para API Key y Filtros
-with st.sidebar:
-    st.markdown("### 📋 Vista de Resultados")
-    vista_mode = st.radio("Selecciona una vista", ["📄 Tarjetas", "🔍 Compacto", "🗂️ Rejilla (Grande)"], label_visibility="collapsed")
-    st.markdown("---")
+# --- CONTROLES SUPERIORES (Dashboard Topbar) ---
+with st.expander("⚙️ Filtros y Configuración de Pantalla", expanded=False):
+    col_dash1, col_dash2, col_dash3 = st.columns([1, 1, 2])
+    with col_dash1:
+        st.session_state.lang = st.selectbox("🌐 Idioma / Language", ["ES", "EN", "PT"], index=["ES", "EN", "PT"].index(st.session_state.lang))
+    with col_dash2:
+        vista_mode = st.radio("📋 Vista de Resultados", ["📄 Tarjetas", "🔍 Compacto", "🗂️ Rejilla (Grande)"])
+    with col_dash3:
+        try:
+            api_key_por_defecto = st.secrets.get("GEMINI_API_KEY", "")
+        except Exception:
+            api_key_por_defecto = ""
+        api_key = st.text_input("Ingresa tu Gemini API Key 🔑", value=api_key_por_defecto, type="password")
+        st.markdown('<a href="https://aistudio.google.com/" target="_blank" style="font-size: 0.75rem; opacity: 0.8;">¿Cómo conseguir una clave gratis?</a>', unsafe_allow_html=True)
 
-    st.session_state.lang = st.selectbox("🌐 Idioma / Language", ["ES", "EN", "PT"], index=["ES", "EN", "PT"].index(st.session_state.lang))
-    st.markdown("---")
-    
-    st.subheader("Configuración de IA")
-    try:
-        api_key_por_defecto = st.secrets.get("GEMINI_API_KEY", "")
-    except Exception:
-        api_key_por_defecto = ""
-        
-    api_key = st.text_input("Ingresa tu Gemini API Key 🔑", value=api_key_por_defecto, type="password")
-    st.markdown("""
-    [¿Cómo conseguir una clave gratis?](https://aistudio.google.com/) 
-    """)
-    st.markdown("---")
-    
-    st.subheader(f"🗂️ {_t('sidebar_title')}")
-    # Aplanar la lista de temáticas para sacar los valores únicos
+    st.markdown('<div style="margin: 10px 0; border-top: 1px solid rgba(255,255,255,0.05);"></div>', unsafe_allow_html=True)
     todas_las_tematicas = sorted(list(set([t for sublist in df['Tematicas'] for t in sublist])))
     temas_seleccionados = st.multiselect(_t("theme_filter"), todas_las_tematicas)
 
@@ -686,6 +664,16 @@ if len(df_filtered) > 0:
         # Modo Compacto: Una sola columna para filas delgadas
         columnas = [st.container()]
 
+    if vista_mode == "🔍 Compacto" and len(df_display) > 0:
+        st.markdown("""
+<div class="compact-table-header" style="display: flex; padding: 10px 14px; background: rgba(255,255,255,0.02); border-bottom: 2px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.4); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">
+    <div style="flex: 2;">Título del Libro</div>
+    <div style="flex: 1; text-align: center;">Colección</div>
+    <div style="flex: 1; text-align: center;">Temáticas</div>
+    <div style="width: 100px; text-align: right;">Acción</div>
+</div>
+""", unsafe_allow_html=True)
+
     for idx, (_, row) in enumerate(df_display.iterrows()):
         # Asignar a la columna correspondiente
         if vista_mode == "🗂️ Rejilla (Grande)":
@@ -700,17 +688,20 @@ if len(df_filtered) > 0:
             tags_html = "".join([f'<span class="book-tag" style="font-size: 0.72rem; padding: 2px 5px; margin: 1px;">{t}</span>' for t in row['Tematicas']])
             
             if vista_mode == "🔍 Compacto":
-                # VISTA COMPACTA (Estilo Fila/Lista)
+                # VISTA COMPACTA (Estilo Fila/Lista de Tabla)
                 html_card = f"""
-<div class="book-card" style="padding: 10px 14px; margin-bottom: 6px; border-radius: 8px; flex-direction: row; align-items: center; justify-content: space-between; display: flex; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
-    <div style="flex: 1; min-width: 0; padding-right: 12px;">
-        <h4 style="margin: 0; font-size: 0.92rem; font-weight: 500; color: #1e293b; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%; vertical-align: middle;">{titulo_limpio}</h4>
-        <span class="collection-pill" style="font-size: 0.7rem; padding: 2px 5px; margin-left: 6px; vertical-align: middle; background: #f1f5f9; color: #475569; font-weight: 500;">{row['Colección']}</span>
-        <div style="margin-top: 3px; display: flex; gap: 3px; flex-wrap: wrap; opacity: 0.85;">{tags_html}</div>
+<div class="compact-table-row" style="display: flex; align-items: center; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.03); background: transparent; transition: all 0.2s ease; margin-bottom: 2px;">
+    <div style="flex: 2; min-width: 0; padding-right: 12px; display: flex; align-items: center; gap: 8px;">
+        <span class="material-symbols-outlined" style="font-size: 1.1rem; color: rgba(255,255,255,0.3);">description</span>
+        <h5 style="margin: 0; font-size: 0.88rem; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{titulo_limpio}</h5>
     </div>
-    <div style="display: flex; gap: 6px; align-items: center; flex-shrink: 0;">
-        <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="margin: 0; padding: 4px 9px; font-size: 0.78rem; height: auto; border-radius: 5px;">
-            {_t("access_btn")}
+    <div style="flex: 1; text-align: center;">
+        <span class="collection-pill" style="font-size: 0.65rem; padding: 3px 8px; border-radius: 6px; background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.04);">{row['Colección']}</span>
+    </div>
+    <div style="flex: 1; display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;">{tags_html}</div>
+    <div style="width: 100px; text-align: right;">
+        <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="padding: 4px 10px; font-size: 0.7rem; text-transform: none; border-radius: 6px; height: auto;">
+            Acceder
         </a>
     </div>
 </div>
@@ -720,23 +711,22 @@ if len(df_filtered) > 0:
             else:
                 # VISTA NORMAL (Cards / Grid en Columnas)
                 html_card = f"""
-<div class="book-card">
-    <div class="header-card">
-        <div class="icon-box"><span class="material-symbols-outlined">description</span></div>
+<div class="book-card" style="height: 100%; display: flex; flex-direction: column;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
         <span class="collection-pill">{row['Colección']}</span>
     </div>
-    <div>
+    <div style="flex-grow: 1;">
         <h3 class="book-title">{titulo_limpio}</h3>
-        <div style="margin-top: 12px;">{tags_html}</div>
+        <div style="margin-top: 10px; display: flex; gap: 4px; flex-wrap: wrap;">{tags_html}</div>
     </div>
-    <div class="file-stats">
-        <div style="display: flex; align-items: center; gap: 6px;">
-            <span class="material-symbols-outlined" style="font-size: 1rem;">database</span> Format PDF
-        </div>
+    <div class="file-stats" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.72rem; color: rgba(255,255,255,0.3); display: flex; align-items: center; gap: 4px;">
+            <span class="material-symbols-outlined" style="font-size: 0.9rem;">description</span> PDF
+        </span>
+        <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="padding: 5px 12px; font-size: 0.75rem; border-radius: 8px; display: flex; align-items: center; gap: 4px;">
+            OPEN <span class="material-symbols-outlined" style="font-size: 0.95rem;">open_in_new</span>
+        </a>
     </div>
-    <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="margin-top: 0.5rem;">
-        {_t("access_btn")} <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_forward</span>
-    </a>
 </div>
 """
                 st.markdown(html_card, unsafe_allow_html=True)

@@ -7,8 +7,11 @@ from tqdm import tqdm
 # ==========================================
 # CONFIGURACIÓN
 # ==========================================
-CSV_FILE = 'biblioteca_indice.csv'
-DB_DIR = './chroma_db'
+# Resolver ruta absoluta relativa al script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+CSV_FILE = os.path.join(script_dir, '../biblioteca_indice.csv')
+DB_DIR = os.path.join(script_dir, '../chroma_db')
 COLLECTION_NAME = 'libros_db'
 MODEL_NAME = 'paraphrase-multilingual-MiniLM-L12-v2'
 BATCH_SIZE = 1000

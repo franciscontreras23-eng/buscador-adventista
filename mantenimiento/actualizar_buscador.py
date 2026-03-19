@@ -8,7 +8,9 @@ from concurrent.futures import ThreadPoolExecutor
 # CONFIGURACIÓN
 # ==========================================
 DOWNLOAD_FOLDER = '/Users/francis.contreras23/Library/CloudStorage/GoogleDrive-secretariosureste23@gmail.com/Mi unidad/Documentos Francis/Theology/Articulos, libros y otros documentos'
-INDEX_FILE = 'biblioteca_indice.csv'
+# Resolver ruta absoluta relativa al script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+INDEX_FILE = os.path.join(script_dir, '../biblioteca_indice.csv')
 # ==========================================
 
 def get_drive_id(file_path):
