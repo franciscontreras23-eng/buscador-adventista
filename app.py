@@ -51,11 +51,16 @@ st.markdown("""
         margin-bottom: 2rem;
     }
 
-    div[data-baseweb="input"] {
-        background-color: #edeeef !important;
-        border: none !important;
-        border-radius: 8px !important;
+    /* Forzar fondo claro y letra oscura en inputs para evitar problemas en móviles */
+    input, textarea {
+        background-color: #ffffff !important;
         color: #191c1d !important;
+    }
+    
+    div[data-baseweb="input"] {
+        background-color: #ffffff !important;
+        border: 1px solid #e1e3e4 !important;
+        border-radius: 8px !important;
         transition: all 0.3s ease;
     }
     
@@ -64,8 +69,19 @@ st.markdown("""
     }
     
     div[data-baseweb="input"]:focus-within {
-        background-color: #ffffff !important;
+        border-color: #004ac6 !important;
         box-shadow: 0 4px 15px rgba(0, 74, 198, 0.08) !important;
+    }
+
+    /* Selectbox / Combobox con fondo claro */
+    div[data-baseweb="select"] {
+        background-color: #ffffff !important;
+        border: 1px solid #e1e3e4 !important;
+        border-radius: 8px !important;
+    }
+    
+    div[data-baseweb="select"] * {
+        color: #191c1d !important;
     }
 
     .book-card {
