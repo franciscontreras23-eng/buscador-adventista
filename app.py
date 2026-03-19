@@ -18,103 +18,115 @@ st.set_page_config(
 # ================= =========================
 # ESTILOS PREMIUM (Vanilla CSS)
 # ==========================================
+# CSS (Light Theme)
+# ==========================================
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
     
     html, body, [class*="css"] {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
     
     .stApp {
-        background: radial-gradient(circle at 10% 20%, rgba(37, 38, 43, 1) 0%, rgba(20, 21, 23, 1) 90%);
-        color: #ffffff;
+        background-color: #f8f9fa;
+        color: #191c1d;
     }
     
     .dashboard-header {
+        font-family: 'Manrope', sans-serif;
         text-align: center;
-        padding: 3rem 1rem;
-        background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        padding: 3rem 1rem 1rem 1rem;
+        color: #191c1d;
         font-weight: 800;
-        font-size: 3.5rem !important;
+        font-size: 3rem !important;
         letter-spacing: -1px;
     }
     
     .dashboard-subheader {
         text-align: center;
-        color: #A0AAB5;
-        font-size: 1.2rem;
-        margin-top: -2rem;
-        margin-bottom: 3rem;
+        color: #434655;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
     }
 
     div[data-baseweb="input"] {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 12px !important;
-        color: white !important;
+        background-color: #edeeef !important;
+        border: none !important;
+        border-radius: 8px !important;
+        color: #191c1d !important;
         transition: all 0.3s ease;
     }
     
+    div[data-baseweb="input"] input {
+        color: #191c1d !important;
+    }
+    
     div[data-baseweb="input"]:focus-within {
-        border-color: #4ECDC4 !important;
-        box-shadow: 0 0 15px rgba(78, 205, 196, 0.2) !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 4px 15px rgba(0, 74, 198, 0.08) !important;
     }
 
     .book-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 16px;
+        background: #ffffff;
+        border-radius: 12px 12px 4px 4px;
         padding: 1.5rem;
-        margin-bottom: 1rem;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        backdrop-filter: blur(10px);
+        margin-bottom: 0rem !important;
+        box-shadow: 0px 4px 20px rgba(25, 28, 29, 0.04);
+        border: 1px solid #e1e3e4;
+        border-bottom: none;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
     }
     
     .book-card:hover {
         transform: translateY(-4px);
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(78, 205, 196, 0.3);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 10px 40px rgba(0, 74, 198, 0.06);
+        border-color: #b4c5ff;
     }
     
     .book-title {
-        color: #FFFFFF;
-        font-size: 1.15rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        line-height: 1.4;
+        font-family: 'Manrope', sans-serif;
+        color: #191c1d;
+        font-size: 1.1rem;
+        font-weight: 800;
+        line-height: 1.3;
+        transition: color 0.3s;
+    }
+    
+    .book-card:hover .book-title {
+        color: #004ac6;
     }
     
     .book-collection {
         display: inline-block;
-        background: rgba(78, 205, 196, 0.1);
-        color: #4ECDC4;
-        font-size: 0.8rem;
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        text-transform: capitalize;
+        background: #edeeef;
+        color: #434655;
+        font-size: 0.65rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
     }
     
     .drive-btn {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        width: 100%;
-        background: linear-gradient(135deg, #1A73E8 0%, #1557B0 100%);
-        color: white !important;
-        text-decoration: none !important;
-        padding: 0.8rem;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 0.95rem;
-        border: none;
-        transition: all 0.2s ease;
         gap: 8px;
+        color: #004ac6 !important;
+        text-decoration: none !important;
+        font-family: 'Manrope', sans-serif;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: transform 0.2s ease;
+    }
+    
+    .book-card:hover .drive-btn {
+        transform: translateX(5px);
     }
     
     .stat-container {
@@ -125,34 +137,155 @@ st.markdown("""
     }
     
     .stat-box {
-        background: rgba(255, 255, 255, 0.02);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        background: transparent;
         padding: 1rem 2rem;
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.03);
         text-align: center;
+        border-left: 1px solid #e1e3e4;
     }
+    .stat-box:first-child { border-left: none; }
     
     .stat-value {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #4ECDC4;
+        font-family: 'Manrope', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #004ac6;
+        line-height: 1;
     }
+    
     .book-tag {
         display: inline-block;
-        background: rgba(255, 165, 0, 0.12);
-        color: #FFA500;
+        background: #f3f4f5;
+        color: #434655;
         font-size: 0.75rem;
-        padding: 0.2rem 0.6rem;
-        border-radius: 6px;
+        padding: 0.3rem 0.8rem;
+        border-radius: 9999px;
         margin-right: 0.4rem;
         margin-bottom: 0.4rem;
-        border: 1px solid rgba(255, 165, 0, 0.3);
-        font-weight: 500;
+        font-weight: 600;
+        transition: background 0.2s;
     }
+    .book-tag:hover {
+        background: #acbfff;
+        color: #00174b;
+    }
+    .icon-box {
+        width: 4rem;
+        height: 4rem;
+        background: #dbe1ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #004ac6;
+    }
+    .icon-box span { font-size: 2rem; }
+    .header-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+    }
+    .collection-pill {
+        background: #edeeef;
+        color: #434655;
+        font-size: 0.65rem;
+        font-weight: 800;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+    .file-stats {
+        display: flex;
+        gap: 2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #737686;
+        margin-top: 0.5rem;
+    }
+    
+    /* Adaptaciones de la barra lateral y botones Streamlit */
+    .stButton>button {
+        border-radius: 8px;
+        border: 1px solid #c3c6d7;
+        color: #004ac6;
+        font-weight: 600;
+    }
+    .stCheckbox label { color: #191c1d !important; }
 </style>
-
 """, unsafe_allow_html=True)
+
+# ==========================================
+# 🌐 TRADUCCIONES (i18n)
+# ==========================================
+if 'lang' not in st.session_state:
+    st.session_state.lang = "ES"
+
+TRANSLATIONS = {
+    "ES": {
+        "title": "Berea Library",
+        "subtitle": "Un santuario para el conocimiento digital.",
+        "global_repo": "Repositorio Global",
+        "curated": "Colecciones",
+        "search_placeholder": "🔍 Busca por título, temática o palabra clave...",
+        "ai_search": "Búsqueda Semántica con IA",
+        "ai_search_desc": "La IA busca conceptos similares (ej. 'ansiedad' halla 'depresión')",
+        "sidebar_title": "Opciones de Búsqueda",
+        "collection_filter": "Filtrar por Colección",
+        "all_collections": "Todas las colecciones",
+        "theme_filter": "Filtrar por Temática",
+        "results_count": "Mostrando **{}** resultados",
+        "access_btn": "ACCEDER DOCUMENTO",
+        "copy_btn": "📋 Copiar Link",
+        "ai_summary": "🧬 Resumen de IA",
+        "gen_summary": "Generar Resumen ⚡",
+        "no_results": "No se encontraron resultados para tu búsqueda.",
+        "load_more": "🔽 Cargar más resultados"
+    },
+    "EN": {
+        "title": "Berea Library",
+        "subtitle": "A sanctuary for digital knowledge.",
+        "global_repo": "Global Repository",
+        "curated": "Collections",
+        "search_placeholder": "🔍 Search by title, theme or keyword...",
+        "ai_search": "AI Semantic Search",
+        "ai_search_desc": "AI searches for similar concepts (e.g., 'anxiety' finds 'depression')",
+        "sidebar_title": "Search Options",
+        "collection_filter": "Filter by Collection",
+        "all_collections": "All collections",
+        "theme_filter": "Filter by Theme",
+        "results_count": "Showing **{}** results",
+        "access_btn": "ACCESS DOCUMENT",
+        "copy_btn": "📋 Copy Link",
+        "ai_summary": "🧬 AI Summary",
+        "gen_summary": "Generate Summary ⚡",
+        "no_results": "No results found for your search.",
+        "load_more": "🔽 Load more results"
+    },
+    "PT": {
+        "title": "Berea Library",
+        "subtitle": "Um santuário para o conhecimento digital.",
+        "global_repo": "Repositório Global",
+        "curated": "Coleções",
+        "search_placeholder": "🔍 Pesquisar por título, tema ou palavra-chave...",
+        "ai_search": "Pesquisa Semântica com IA",
+        "ai_search_desc": "A IA procura conceitos semelhantes",
+        "sidebar_title": "Opções de Pesquisa",
+        "collection_filter": "Filtrar por Coleção",
+        "all_collections": "Todas as coleções",
+        "theme_filter": "Filtrar por Tema",
+        "results_count": "Mostrando **{}** resultados",
+        "access_btn": "ACESSAR DOCUMENTO",
+        "copy_btn": "📋 Copiar Link",
+        "ai_summary": "🧬 Resumo da IA",
+        "gen_summary": "Gerar Resumo ⚡",
+        "no_results": "Nenhum resultado encontrado.",
+        "load_more": "🔽 Carregar mais resultados"
+    }
+}
+
+def _t(key):
+    return TRANSLATIONS[st.session_state.lang].get(key, key)
 
 # Lógica de Categorización Automática (Nivel 2)
 def categorizar_libro(nombre):
@@ -359,10 +492,14 @@ def reordenar_por_relevancia(query, df_sub, api_key):
 
 df = cargar_datos()
 
-st.markdown('<div class="dashboard-header">Biblioteca Digital 🧠</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="dashboard-header">{_t("title")}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="dashboard-subheader">{_t("subtitle")}</div>', unsafe_allow_html=True)
 
 # Sidebar para API Key y Filtros
 with st.sidebar:
+    st.session_state.lang = st.selectbox("🌐 Idioma / Language", ["ES", "EN", "PT"], index=["ES", "EN", "PT"].index(st.session_state.lang))
+    st.markdown("---")
+    
     st.subheader("Configuración de IA")
     api_key_por_defecto = st.secrets.get("GEMINI_API_KEY", "")
     api_key = st.text_input("Ingresa tu Gemini API Key 🔑", value=api_key_por_defecto, type="password")
@@ -371,10 +508,10 @@ with st.sidebar:
     """)
     st.markdown("---")
     
-    st.subheader("Filtros Avanzados 🗂️")
+    st.subheader(f"🗂️ {_t('sidebar_title')}")
     # Aplanar la lista de temáticas para sacar los valores únicos
     todas_las_tematicas = sorted(list(set([t for sublist in df['Tematicas'] for t in sublist])))
-    temas_seleccionados = st.multiselect("Filtrar por tema:", todas_las_tematicas)
+    temas_seleccionados = st.multiselect(_t("theme_filter"), todas_las_tematicas)
 
 if df.empty:
 
@@ -387,8 +524,8 @@ colecciones = df['Colección'].dropna().unique()
 
 st.markdown(f"""
 <div class="stat-container">
-    <div class="stat-box"><div class="stat-value">{total_libros:,}</div><div class="stat-label">Libros Totales</div></div>
-    <div class="stat-box"><div class="stat-value">{len(colecciones)}</div><div class="stat-label">Colecciones</div></div>
+    <div class="stat-box"><div class="stat-value">{total_libros:,}</div><div class="stat-label">{_t("global_repo")}</div></div>
+    <div class="stat-box"><div class="stat-value">{len(colecciones)}</div><div class="stat-label">{_t("curated")}</div></div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -398,13 +535,13 @@ st.markdown(f"""
 col_search, col_ia, col_filter = st.columns([3, 1, 1])
 
 with col_search:
-    busqueda = st.text_input("", placeholder="🔍 Escribe lo que buscas (Ej: Libros de Elena White para jóvenes)...")
+    busqueda = st.text_input("Search", label_visibility="collapsed", placeholder=_t("search_placeholder"))
 
 with col_ia:
-    usar_ia = st.checkbox("Buscar con IA 🤖")
+    usar_ia = st.checkbox(_t("ai_search"), help=_t("ai_search_desc"))
 
 with col_filter:
-    filtro_coleccion = st.selectbox("", ["Todas las colecciones"] + list(colecciones))
+    filtro_coleccion = st.selectbox("Collection", label_visibility="collapsed", options=[_t("all_collections")] + list(colecciones))
 
 # ==========================================
 # LÓGICA DE FILTRADO
@@ -499,7 +636,7 @@ if busqueda:
 
 # Si la IA NO se usó (o falló), aplicar filtros tradicionales arriba de los resultados
 if not (usar_ia and collection and busqueda):
-    if filtro_coleccion != "Todas las colecciones":
+    if filtro_coleccion != _t("all_collections"):
         df_filtered = df_filtered[df_filtered['Colección'] == filtro_coleccion]
 
 # El filtro de temática es una lista dentro del DF original
@@ -514,7 +651,7 @@ if 'temas_seleccionados' in locals() and temas_seleccionados:
 # RESULTADOS
 # ==========================================
 if len(df_filtered) > 0:
-    st.write(f"Mostrando **{len(df_filtered)}** resultados relacionados")
+    st.write(_t("results_count").format(len(df_filtered)))
     
     df_display = df_filtered.head(st.session_state.limite_resultados)
     columnas = st.columns(3)
@@ -523,28 +660,40 @@ if len(df_filtered) > 0:
         col_idx = idx % 3
         with columnas[col_idx]:
             titulo_limpio = row['Nombre'].replace('.pdf', '').replace('_', ' ').replace('-', ' ')
-            # Generar HTML de tags
             tags_html = "".join([f'<span class="book-tag">{t}</span>' for t in row['Tematicas']])
             
-            st.markdown(f"""
-            <div class="book-card">
-                <div class="book-collection">📂 {row['Colección']}</div>
-                <div style="margin-top: -5px; margin-bottom: 8px;">{tags_html}</div>
-                <div class="book-title">{titulo_limpio}</div>
-                <a href="{row['Drive_URL']}" target="_blank" class="drive-btn">Abrir en Google Drive</a>
-            </div>
-            """, unsafe_allow_html=True)
+            html_card = f"""
+<div class="book-card">
+    <div class="header-card">
+        <div class="icon-box"><span class="material-symbols-outlined">description</span></div>
+        <span class="collection-pill">{row['Colección']}</span>
+    </div>
+    <div>
+        <h3 class="book-title">{titulo_limpio}</h3>
+        <div style="margin-top: 12px;">{tags_html}</div>
+    </div>
+    <div class="file-stats">
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="material-symbols-outlined" style="font-size: 1rem;">database</span> Format PDF
+        </div>
+    </div>
+    <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="margin-top: 0.5rem;">
+        {_t("access_btn")} <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_forward</span>
+    </a>
+</div>
+"""
+            st.markdown(html_card, unsafe_allow_html=True)
             
-            # Utilidad para NotebookLM (Copiar Link rápido)
-            st_copy_to_clipboard(row['Drive_URL'], text="📋 Copiar Link", show_text=True)
+            # Utilidad para NotebookLM (Copiar Link rápido, solo botón sin caja de texto)
+            st_copy_to_clipboard(row['Drive_URL'], before_copy_label=_t("copy_btn"), show_text=False)
             
             # Botón para Resumen IA (Nivel 1)
-            with st.expander("🧬 Resumen de IA"):
-                if st.button("Generar Resumen ⚡", key=f"resumen_{row['Nombre']}"):
+            with st.expander(_t("ai_summary")):
+                if st.button(_t("gen_summary"), key=f"resumen_{row['Nombre']}"):
                     if not api_key:
                         st.error("⚠️ Debes tener el API Key para generar resúmenes.")
                     else:
-                        with st.spinner("Leyendo y resumiendo..."):
+                        with st.spinner("..."):
                             resumen = resumir_libro(row['Ruta_Local'], api_key)
                             st.markdown(resumen)
                             
@@ -553,10 +702,10 @@ if len(df_filtered) > 0:
         st.write("")
         col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
         with col_btn2:
-            if st.button("🔽 Cargar más resultados", use_container_width=True):
+            if st.button(_t("load_more"), use_container_width=True):
                 st.session_state.limite_resultados += 12
                 st.rerun()
 else:
-    st.info("No se encontraron resultados para tu búsqueda.")
+    st.info(_t("no_results"))
 
 
