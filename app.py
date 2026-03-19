@@ -513,8 +513,8 @@ st.markdown(f'<div class="dashboard-subheader">{_t("subtitle")}</div>', unsafe_a
 
 # Sidebar para API Key y Filtros
 with st.sidebar:
-    st.markdown("### 🧭 Navegación")
-    pagina = st.radio("Ir a", ["🔍 Buscar Libros", "📤 Subir un Recurso"], label_visibility="collapsed")
+    st.markdown("### 📋 Vista de Resultados")
+    vista_mode = st.radio("Selecciona una vista", ["📄 Tarjetas", "🔍 Compacto", "🗂️ Rejilla (Grande)"], label_visibility="collapsed")
     st.markdown("---")
 
     st.session_state.lang = st.selectbox("🌐 Idioma / Language", ["ES", "EN", "PT"], index=["ES", "EN", "PT"].index(st.session_state.lang))
@@ -551,19 +551,6 @@ st.markdown(f"""
     <div class="stat-box"><div class="stat-value">{len(colecciones)}</div><div class="stat-label">{_t("curated")}</div></div>
 </div>
 """, unsafe_allow_html=True)
-
-# --- Switch de Páginas ---
-if pagina == "📤 Subir un Recurso":
-    st.markdown("### 📤 Contribuir Material a la Biblioteca")
-    st.markdown("Usa el siguiente formulario para enviarme tu libro o recurso. Se guardará de forma segura en mi Google Drive para ser procesado.")
-    
-    # URL de marcador de posición (el usuario lo cambiará por su enlace de Formulario)
-    formulario_url = "https://docs.google.com/forms/d/e/1FAIpQLSeUQ5CqW9gDk5F7Y7q6I7m9oXq8I6f7Y7q6I7m9oXq8I6f7Y7q/viewform?embedded=true"
-    
-    st.warning("💡 **Mensaje para Francis**: Para que las subidas caigan en **tu Drive**, por favor crea un *Google Form* con carga de archivos habilitada y pega su enlace en el archivo `app.py` reemplazando la variable `formulario_url`.")
-    
-    st.components.v1.iframe(formulario_url, height=800, scrolling=True)
-    st.stop() # Frena la ejecución del buscador para esta vista
 
 # ================= =========================
 # BARRA DE BUSQUEDA
@@ -690,15 +677,49 @@ if len(df_filtered) > 0:
     st.write(_t("results_count").format(len(df_filtered)))
     
     df_display = df_filtered.head(st.session_state.limite_resultados)
-    columnas = st.columns(3)
-    
+    # --- CONFIGURAR COLUMNAS SEGÚN LA VISTA ---
+    if vista_mode == "🗂️ Rejilla (Grande)":
+        columnas = st.columns(3)
+    elif vista_mode == "📄 Tarjetas":
+        columnas = st.columns(2) # 2 columnas para tarjetas más cómodas en pantalla
+    else:
+        # Modo Compacto: Una sola columna para filas delgadas
+        columnas = [st.container()]
+
     for idx, (_, row) in enumerate(df_display.iterrows()):
-        col_idx = idx % 3
-        with columnas[col_idx]:
-            titulo_limpio = row['Nombre'].replace('.pdf', '').replace('_', ' ').replace('-', ' ')
-            tags_html = "".join([f'<span class="book-tag">{t}</span>' for t in row['Tematicas']])
+        # Asignar a la columna correspondiente
+        if vista_mode == "🗂️ Rejilla (Grande)":
+            col_target = columnas[idx % 3]
+        elif vista_mode == "📄 Tarjetas":
+            col_target = columnas[idx % 2]
+        else:
+            col_target = columnas[0]
             
-            html_card = f"""
+        with col_target:
+            titulo_limpio = row['Nombre'].replace('.pdf', '').replace('_', ' ').replace('-', ' ')
+            tags_html = "".join([f'<span class="book-tag" style="font-size: 0.72rem; padding: 2px 5px; margin: 1px;">{t}</span>' for t in row['Tematicas']])
+            
+            if vista_mode == "🔍 Compacto":
+                # VISTA COMPACTA (Estilo Fila/Lista)
+                html_card = f"""
+<div class="book-card" style="padding: 10px 14px; margin-bottom: 6px; border-radius: 8px; flex-direction: row; align-items: center; justify-content: space-between; display: flex; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+    <div style="flex: 1; min-width: 0; padding-right: 12px;">
+        <h4 style="margin: 0; font-size: 0.92rem; font-weight: 500; color: #1e293b; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%; vertical-align: middle;">{titulo_limpio}</h4>
+        <span class="collection-pill" style="font-size: 0.7rem; padding: 2px 5px; margin-left: 6px; vertical-align: middle; background: #f1f5f9; color: #475569; font-weight: 500;">{row['Colección']}</span>
+        <div style="margin-top: 3px; display: flex; gap: 3px; flex-wrap: wrap; opacity: 0.85;">{tags_html}</div>
+    </div>
+    <div style="display: flex; gap: 6px; align-items: center; flex-shrink: 0;">
+        <a href="{row['Drive_URL']}" target="_blank" class="drive-btn" style="margin: 0; padding: 4px 9px; font-size: 0.78rem; height: auto; border-radius: 5px;">
+            {_t("access_btn")}
+        </a>
+    </div>
+</div>
+"""
+                st.markdown(html_card, unsafe_allow_html=True)
+                # Omitimos clipboard y resumen en compacto para ahorrar espacio al máximo
+            else:
+                # VISTA NORMAL (Cards / Grid en Columnas)
+                html_card = f"""
 <div class="book-card">
     <div class="header-card">
         <div class="icon-box"><span class="material-symbols-outlined">description</span></div>
@@ -718,20 +739,20 @@ if len(df_filtered) > 0:
     </a>
 </div>
 """
-            st.markdown(html_card, unsafe_allow_html=True)
-            
-            # Utilidad para NotebookLM (Copiar Link rápido, solo botón sin caja de texto)
-            st_copy_to_clipboard(row['Drive_URL'], before_copy_label=_t("copy_btn"), show_text=False)
-            
-            # Botón para Resumen IA (Nivel 1)
-            with st.expander(_t("ai_summary")):
-                if st.button(_t("gen_summary"), key=f"resumen_{row['Nombre']}"):
-                    if not api_key:
-                        st.error("⚠️ Debes tener el API Key para generar resúmenes.")
-                    else:
-                        with st.spinner("..."):
-                            resumen = resumir_libro(row['Ruta_Local'], api_key)
-                            st.markdown(resumen)
+                st.markdown(html_card, unsafe_allow_html=True)
+                
+                # Utilidad para NotebookLM (Copiar Link rápido)
+                st_copy_to_clipboard(row['Drive_URL'], before_copy_label=_t("copy_btn"), show_text=False)
+                
+                # Botón para Resumen IA (Nivel 1)
+                with st.expander(_t("ai_summary")):
+                    if st.button(_t("gen_summary"), key=f"resumen_{idx}_{row['Nombre']}"): # Añadido idx para evitar duplicados de Key
+                        if not api_key:
+                            st.error("⚠️ Debes tener el API Key para generar resúmenes.")
+                        else:
+                            with st.spinner("..."):
+                                resumen = resumir_libro(row['Ruta_Local'], api_key)
+                                st.markdown(resumen)
                             
     # Botón Ver Más
     if len(df_filtered) > st.session_state.limite_resultados:
