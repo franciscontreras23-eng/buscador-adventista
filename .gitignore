@@ -1,0 +1,17 @@
+# Pytnon
+__pycache__/
+*.pyc
+*.pyo
+app_venv/
+
+# Environment
+.env
+.secrets.toml
+.streamlit/secrets.toml
+
+# Mac system files
+.DS_Store
+
+# Temporary outputs (We actually DO NOT want to exclude chroma_db 
+# because it needs to be included in Streamlit Cloud, unless we build a script to regenerate it there. 
+# But regenerating 21k files online will timeout on free tier! So we KEEP chroma_db in version control!)
