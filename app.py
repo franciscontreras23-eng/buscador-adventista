@@ -501,7 +501,11 @@ with st.sidebar:
     st.markdown("---")
     
     st.subheader("Configuración de IA")
-    api_key_por_defecto = st.secrets.get("GEMINI_API_KEY", "")
+    try:
+        api_key_por_defecto = st.secrets.get("GEMINI_API_KEY", "")
+    except Exception:
+        api_key_por_defecto = ""
+        
     api_key = st.text_input("Ingresa tu Gemini API Key 🔑", value=api_key_por_defecto, type="password")
     st.markdown("""
     [¿Cómo conseguir una clave gratis?](https://aistudio.google.com/) 
