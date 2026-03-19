@@ -513,6 +513,10 @@ st.markdown(f'<div class="dashboard-subheader">{_t("subtitle")}</div>', unsafe_a
 
 # Sidebar para API Key y Filtros
 with st.sidebar:
+    st.markdown("### 🧭 Navegación")
+    pagina = st.radio("Ir a", ["🔍 Buscar Libros", "📤 Subir un Recurso"], label_visibility="collapsed")
+    st.markdown("---")
+
     st.session_state.lang = st.selectbox("🌐 Idioma / Language", ["ES", "EN", "PT"], index=["ES", "EN", "PT"].index(st.session_state.lang))
     st.markdown("---")
     
@@ -534,7 +538,6 @@ with st.sidebar:
     temas_seleccionados = st.multiselect(_t("theme_filter"), todas_las_tematicas)
 
 if df.empty:
-
     st.warning("⚠️ No se encontró el archivo de índice.")
     st.stop()
 
@@ -548,6 +551,19 @@ st.markdown(f"""
     <div class="stat-box"><div class="stat-value">{len(colecciones)}</div><div class="stat-label">{_t("curated")}</div></div>
 </div>
 """, unsafe_allow_html=True)
+
+# --- Switch de Páginas ---
+if pagina == "📤 Subir un Recurso":
+    st.markdown("### 📤 Contribuir Material a la Biblioteca")
+    st.markdown("Usa el siguiente formulario para enviarme tu libro o recurso. Se guardará de forma segura en mi Google Drive para ser procesado.")
+    
+    # URL de marcador de posición (el usuario lo cambiará por su enlace de Formulario)
+    formulario_url = "https://docs.google.com/forms/d/e/1FAIpQLSeUQ5CqW9gDk5F7Y7q6I7m9oXq8I6f7Y7q6I7m9oXq8I6f7Y7q/viewform?embedded=true"
+    
+    st.warning("💡 **Mensaje para Francis**: Para que las subidas caigan en **tu Drive**, por favor crea un *Google Form* con carga de archivos habilitada y pega su enlace en el archivo `app.py` reemplazando la variable `formulario_url`.")
+    
+    st.components.v1.iframe(formulario_url, height=800, scrolling=True)
+    st.stop() # Frena la ejecución del buscador para esta vista
 
 # ================= =========================
 # BARRA DE BUSQUEDA
